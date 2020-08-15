@@ -6,10 +6,10 @@
     android:padding="24dp">
 
     <EditText
-        android:id="@+id/seconds"
+        android:id="@+id/hours"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Seconds"
+        android:hint="Hours"
         android:inputType="number"
         android:maxLength="2"
         android:text="00" />
@@ -24,11 +24,13 @@
         android:text="00" />
 
     <EditText
-        android:id="@+id/hours"
+        android:id="@+id/seconds"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Hours"
+        android:hint="Seconds"
         android:inputType="number"
         android:maxLength="2"
         android:text="00" />
+
+
 </LinearLayout>
