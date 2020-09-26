@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         newFragment.show(getSupportFragmentManager(), "getDuration");
     }
 
-    public void startTimer(String seconds, String minutes, String hours) {
+    public void startTimer(int seconds, int minutes, int hours) {
         TextView time = findViewById(R.id.time);
         totalTimeInSeconds = convertTimeToSeconds(seconds, minutes, hours);
         String timeToDisplay = String.format("%02d:%02d:%02d", getHours(totalTimeInSeconds), getMinutes(totalTimeInSeconds), totalTimeInSeconds);
@@ -38,12 +38,8 @@ public class MainActivity extends AppCompatActivity {
         return time / 60;
     }
 
-    private int convertTimeToSeconds(String seconds, String minutes, String hours) {
-        int hoursInteger = Integer.parseInt(hours);
-        int minutesInteger = Integer.parseInt(minutes);
-        int secondsInteger = Integer.parseInt(seconds);
-
-        return hoursInteger * 3600 + minutesInteger * 60 + secondsInteger;
+    private int convertTimeToSeconds(int seconds, int minutes, int hours) {
+        return hours * 3600 + minutes * 60 + seconds;
 
     }
 }
