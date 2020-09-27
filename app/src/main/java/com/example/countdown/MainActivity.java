@@ -1,6 +1,7 @@
 package com.example.countdown;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.TextView;
 
@@ -8,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 public class MainActivity extends AppCompatActivity {
-    int totalTimeInSeconds = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,23 +23,31 @@ public class MainActivity extends AppCompatActivity {
 
     public void startTimer(int seconds, int minutes, int hours) {
         TextView time = findViewById(R.id.time);
-        totalTimeInSeconds = convertTimeToSeconds(seconds, minutes, hours);
-        String timeToDisplay = String.format("%02d:%02d:%02d", getHours(totalTimeInSeconds), getMinutes(totalTimeInSeconds), totalTimeInSeconds);
-        time.setText(timeToDisplay);
+        int totalTimeInSeconds = convertTimeToSeconds(seconds, minutes, hours);
+        new CountDownTimer(totalTimeInSeconds * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long millisUntilFinishedInSeconds = millisUntilFinished / 1000;
+                String timeToDisplay = String.format("%02d:%02d:%02d", getHours(millisUntilFinishedInSeconds), getMinutes(millisUntilFinishedInSeconds), millisUntilFinished / 1000 % 60);
+                time.setText(timeToDisplay);
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
     }
 
-    private int getHours(int time) {
-        totalTimeInSeconds = time % 3600;
+    private long getHours(long time) {
         return time / 3600;
     }
 
-    private int getMinutes(int time) {
-        totalTimeInSeconds = time % 60;
+    private long getMinutes(long time) {
         return time / 60;
     }
 
     private int convertTimeToSeconds(int seconds, int minutes, int hours) {
         return hours * 3600 + minutes * 60 + seconds;
-
     }
 }
