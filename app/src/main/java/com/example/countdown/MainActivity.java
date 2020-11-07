@@ -3,6 +3,7 @@ package com.example.countdown;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void startTimer(int seconds, int minutes, int hours) {
         TextView time = findViewById(R.id.time);
+        Button start = findViewById(R.id.start_button);
         int totalTimeInSeconds = convertTimeToSeconds(seconds, minutes, hours);
         new CountDownTimer(totalTimeInSeconds * 1000, 1000) {
             @Override
@@ -34,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-
             }
         }.start();
     }
