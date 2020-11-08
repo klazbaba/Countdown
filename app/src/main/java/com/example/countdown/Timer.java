@@ -3,6 +3,7 @@ package com.example.countdown;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Process;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -11,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-public class Timer extends DialogFragment {
+public class Timer extends DialogFragment implements Runnable {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -28,14 +29,30 @@ public class Timer extends DialogFragment {
     }
 
     private void handleOKPress(View view) {
-        EditText secondsTextView = view.findViewById(R.id.seconds);
-        EditText minutesTextView = view.findViewById(R.id.minutes);
-        EditText hoursTextView = view.findViewById(R.id.hours);
+        EditText secondsEditText = view.findViewById(R.id.seconds);
+        EditText minutesEditText = view.findViewById(R.id.minutes);
+        EditText hoursEditText = view.findViewById(R.id.hours);
 
-        String seconds = secondsTextView.getText().toString();
-        String minutes = minutesTextView.getText().toString();
-        String hours = hoursTextView.getText().toString();
+        int seconds = Integer.parseInt(secondsEditText.getText().toString());
+        int minutes = Integer.parseInt(minutesEditText.getText().toString());
+        int hours = Integer.parseInt(hoursEditText.getText().toString());
+
+        if (seconds > 60) {
+            secondsEditText.setError("Seconds cannot be above 60");
+            return;
+        }
+
+        if (minutes > 60) {
+            secondsEditText.setError("Minutes cannot be above 60");
+            return;
+        }
 
         ((MainActivity) getActivity()).startTimer(seconds, minutes, hours);
+    }
+
+    @Override
+    public void run() {
+        Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+
     }
 }
