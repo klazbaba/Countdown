@@ -3,6 +3,7 @@ package com.example.countdown;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Process;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -11,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-public class Timer extends DialogFragment {
+public class Timer extends DialogFragment implements Runnable {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -47,5 +48,11 @@ public class Timer extends DialogFragment {
         }
 
         ((MainActivity) getActivity()).startTimer(seconds, minutes, hours);
+    }
+
+    @Override
+    public void run() {
+        Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+
     }
 }
