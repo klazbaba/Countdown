@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-public class Timer extends DialogFragment implements Runnable {
+public class TimeInputDialog extends DialogFragment implements Runnable {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -33,9 +33,13 @@ public class Timer extends DialogFragment implements Runnable {
         EditText minutesEditText = view.findViewById(R.id.minutes);
         EditText hoursEditText = view.findViewById(R.id.hours);
 
-        int seconds = Integer.parseInt(secondsEditText.getText().toString());
-        int minutes = Integer.parseInt(minutesEditText.getText().toString());
-        int hours = Integer.parseInt(hoursEditText.getText().toString());
+        String providedSeconds = secondsEditText.getText().toString();
+        String providedMinutes = minutesEditText.getText().toString();
+        String providedHours = hoursEditText.getText().toString();
+
+        int seconds = Integer.parseInt(providedSeconds.equals("") ? "0" : providedSeconds);
+        int minutes = Integer.parseInt(providedMinutes.equals("") ? "0" : providedMinutes);
+        int hours = Integer.parseInt(providedHours.equals("") ? "0" : providedHours);
 
         if (seconds > 60) {
             secondsEditText.setError("Seconds cannot be above 60");

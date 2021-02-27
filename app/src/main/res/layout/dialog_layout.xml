@@ -11,8 +11,7 @@
         android:layout_height="wrap_content"
         android:hint="Hours"
         android:inputType="number"
-        android:maxLength="2"
-        android:text="00" />
+        android:maxLength="2" />
 
     <EditText
         android:id="@+id/minutes"
@@ -20,8 +19,7 @@
         android:layout_height="wrap_content"
         android:hint="Minutes"
         android:inputType="number"
-        android:maxLength="2"
-        android:text="00" />
+        android:maxLength="2" />
 
     <EditText
         android:id="@+id/seconds"
@@ -29,8 +27,7 @@
         android:layout_height="wrap_content"
         android:hint="Seconds"
         android:inputType="number"
-        android:maxLength="2"
-        android:text="00" />
+        android:maxLength="2" />
 
 
 </LinearLayout>
